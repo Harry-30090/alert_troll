@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DON'T CLICK THE SOUND skull</title>
+    <style>
+        /* Ensure that the image takes up the full screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #image-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Style for the button */
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007B9E;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="startButton">Start</button>
+
+    <div id="image-container"></div>
+    <audio id="audio" preload="auto" loop>
+        <source src="alert.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const button = document.getElementById('startButton');
+        const imageContainer = document.getElementById('image-container');
+        const audio = document.getElementById('audio');
+
+        button.addEventListener('click', () => {
+            // Disable the button after it's clicked
+            button.disabled = true;
+
+            // Wait 5 seconds, then show image and play music
+            setTimeout(() => {
+                // Set the background image of the container (add your image URL here)
+                imageContainer.style.backgroundImage = "url('hacked_lol.png')";
+                imageContainer.style.display = "block";
+                
+                // Play music
+                audio.play();
+            }, 5000);
+        });
+    </script>
+
+</body>
+</html>
