@@ -7,8 +7,7 @@
     <style>
         /* Ensure that the image takes up the full screen */
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 0;padding: 0;
             height: 100%;
             display: flex;
             justify-content: center;
@@ -46,10 +45,10 @@
 <body>
 
     <button id="startButton">Start</button>
-
+    <div id="countdown" style="font-size: 2rem; margin-top: 20px;"></div>
     <div id="image-container"></div>
     <audio id="audio" preload="auto" loop>
-        <source src="alert.mp3" type="audio/mp3">
+        <source src="alarm-loud.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
@@ -57,22 +56,27 @@
         const button = document.getElementById('startButton');
         const imageContainer = document.getElementById('image-container');
         const audio = document.getElementById('audio');
+        const countdown = document.getElementById('countdown');
 
         button.addEventListener('click', () => {
-            // Disable the button after it's clicked
             button.disabled = true;
+            let timeLeft = 5;
+            countdown.textContent = `Starting in ${timeLeft}...`;
 
-            // Wait 5 seconds, then show image and play music
-            setTimeout(() => {
-                // Set the background image of the container (add your image URL here)
-                imageContainer.style.backgroundImage = "url('hacked_lol.png')";
-                imageContainer.style.display = "block";
-                
-                // Play music
-                audio.play();
-            }, 5000);
+            const interval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    countdown.textContent = `Starting in ${timeLeft}...`;
+                } else {
+                    clearInterval(interval);
+                    countdown.textContent = '';
+                    imageContainer.style.backgroundImage = "url('hacked_lol.png')";
+                    imageContainer.style.display = "block";
+                    audio.play();
+                    window.open('autoopen.html', '_blank'); // Open test.html after alarm
+                }
+            }, 1000);
         });
     </script>
-
 </body>
 </html>
